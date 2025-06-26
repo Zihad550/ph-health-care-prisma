@@ -13,8 +13,8 @@ model User {
   email               String     @unique
   password            String
   role                UserRole
-  needsPasswordChange Boolean
-  status              UserStatus
+  needsPasswordChange Boolean    @default(true)
+  status              UserStatus @default(ACTIVE)
   createdAt           DateTime   @default(now())
   updatedAt           DateTime   @updatedAt
   admin               Admin?
@@ -28,7 +28,7 @@ model Admin {
   email         String   @unique
   profilePhoto  String?
   contactNumber String
-  isDeleted     Boolean
+  isDeleted     Boolean  @default(false)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
@@ -47,4 +47,5 @@ enum UserRole {
 enum UserStatus {
   ACTIVE
   BLOCKED
+  DELETED
 }
