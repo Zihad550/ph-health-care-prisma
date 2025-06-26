@@ -10,7 +10,7 @@ cloudinary.config({
   api_secret: config.CLOUDINARY_API_SECRET,
 });
 
-const uploadToCloudinary = (file: IFile): Promise<Record<string, unknown>> => {
+const uploadToCloudinary = (file: IFile): Promise<UploadApiResponse> => {
   return new Promise((resolve, reject) => {
     cloudinary.uploader.upload(
       file.path,

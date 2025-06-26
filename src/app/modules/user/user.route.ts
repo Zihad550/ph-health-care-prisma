@@ -1,5 +1,5 @@
 import express, { NextFunction, Request, Response } from "express";
-import { userController } from "./user.controller";
+import { UserControllers } from "./user.controller";
 import auth from "../../middlewares/auth";
 import { UserRole } from "../../../generated/prisma";
 import { fileUploader } from "../../utils/fileUploader";
@@ -11,13 +11,13 @@ const router = express.Router();
 router.get(
   "/",
   auth(UserRole.SUPER_ADMIN, UserRole.ADMIN),
-  userController.getAllFromDB,
+  UserControllers.getAllFromDB,
 );
 
 router.get(
   "/me",
   auth(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.DOCTOR, UserRole.PATIENT),
-  userController.getMyProfile,
+  UserControllers.getMyProfile,
 );
 
 router.post(
@@ -26,8 +26,9 @@ router.post(
   fileUploader.upload.single("file"),
   (req: Request, res: Response, next: NextFunction) => {
     req.body = userValidation.createAdmin.parse(JSON.parse(req.body.data));
-    return userController.createAdmin(req, res, next);
+    next();
   },
+  UserControllers.createAdmin,
 );
 
 router.post(
@@ -36,8 +37,9 @@ router.post(
   fileUploader.upload.single("file"),
   (req: Request, res: Response, next: NextFunction) => {
     req.body = userValidation.createDoctor.parse(JSON.parse(req.body.data));
-    return userController.createDoctor(req, res, next);
+    next();
   },
+  UserControllers.createDoctor,
 );
 
 router.post(
@@ -45,15 +47,16 @@ router.post(
   fileUploader.upload.single("file"),
   (req: Request, res: Response, next: NextFunction) => {
     req.body = userValidation.createPatient.parse(JSON.parse(req.body.data));
-    return userController.createPatient(req, res, next);
+    next();
   },
+  UserControllers.createPatient,
 );
 
 router.patch(
   "/:id/status",
   auth(UserRole.SUPER_ADMIN, UserRole.ADMIN),
   validateRequest(userValidation.updateStatus),
-  userController.changeProfileStatus,
+  UserControllers.changeProfileStatus,
 );
 
 router.patch(
@@ -62,8 +65,9 @@ router.patch(
   fileUploader.upload.single("file"),
   (req: Request, res: Response, next: NextFunction) => {
     req.body = JSON.parse(req.body.data);
-    return userController.updateMyProfie(req, res, next);
+    next();
   },
+  UserControllers.updateMyProfie,
 );
 
 export const UserRoutes = router;

@@ -95,12 +95,12 @@ const createPatient = async (req: Request): Promise<Patient> => {
     role: UserRole.PATIENT,
   };
 
-  const result = await prisma.$transaction(async (transactionClient) => {
-    await transactionClient.user.create({
+  const result = await prisma.$transaction(async (tx) => {
+    await tx.user.create({
       data: userData,
     });
 
-    const createdPatientData = await transactionClient.patient.create({
+    const createdPatientData = await tx.patient.create({
       data: req.body.patient,
     });
 
@@ -181,8 +181,11 @@ const getAllFromDB = async (params: any, options: IPaginationOptions) => {
   };
 };
 
-const changeProfileStatus = async (id: string, status: UserRole) => {
-  const userData = await prisma.user.findUniqueOrThrow({
+const changeProfileStatus = async (
+  id: string,
+  status: Record<string, UserStatus>,
+) => {
+  await prisma.user.findUniqueOrThrow({
     where: {
       id,
     },
