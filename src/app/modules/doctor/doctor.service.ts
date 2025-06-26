@@ -213,7 +213,7 @@ const softDelete = async (id: string): Promise<Doctor> => {
   });
 };
 
-export const DoctorService = {
+export const DoctorServices = {
   updateIntoDB,
   getAllFromDB,
   getByIdFromDB,
