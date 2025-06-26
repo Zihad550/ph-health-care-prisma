@@ -138,8 +138,8 @@ const softDeleteFromDB = async (id: string): Promise<Admin | null> => {
     },
   });
 
-  const result = await prisma.$transaction(async (transactionClient) => {
-    const adminDeletedData = await transactionClient.admin.update({
+  const result = await prisma.$transaction(async (tx) => {
+    const adminDeletedData = await tx.admin.update({
       where: {
         id,
       },
@@ -148,7 +148,7 @@ const softDeleteFromDB = async (id: string): Promise<Admin | null> => {
       },
     });
 
-    await transactionClient.user.update({
+    await tx.user.update({
       where: {
         email: adminDeletedData.email,
       },

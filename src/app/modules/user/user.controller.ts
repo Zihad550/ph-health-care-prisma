@@ -36,7 +36,6 @@ const createPatient = catchAsync(async (req, res) => {
 });
 
 const getAllFromDB = catchAsync(async (req, res) => {
-  // console.log(req.query)
   const filters = pick(req.query, userFilterableFields);
   const options = pick(req.query, ["limit", "page", "sortBy", "sortOrder"]);
 
@@ -89,7 +88,7 @@ const updateMyProfie = catchAsync(async (req, res) => {
   });
 });
 
-export const userController = {
+export const UserControllers = {
   createAdmin,
   createDoctor,
   createPatient,
