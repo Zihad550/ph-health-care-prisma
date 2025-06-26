@@ -1,12 +1,12 @@
 import { BloodGroup, Gender, MaritalStatus } from "../../../generated/prisma";
 
-export type IPatientFilterRequest = {
+export interface IPatientFilterRequest {
   searchTerm?: string | undefined;
   email?: string | undefined;
   contactNo?: string | undefined;
-};
+}
 
-type IPatientHealthData = {
+interface IPatientHealthData {
   gender: Gender;
   dateOfBirth: string;
   bloodGroup: BloodGroup;
@@ -23,17 +23,17 @@ type IPatientHealthData = {
   recentAnxiety?: boolean;
   recentDepression?: boolean;
   maritalStatus?: MaritalStatus;
-};
+}
 
-type IMedicalReport = {
+interface IMedicalReport {
   reportName: string;
   reportLink: string;
-};
+}
 
-export type IPatientUpdate = {
+export interface IPatientUpdate {
   name: string;
   contactNumber: string;
   address: string;
   patientHealthData: IPatientHealthData;
   medicalReport: IMedicalReport;
-};
+}
