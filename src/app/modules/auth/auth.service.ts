@@ -1,6 +1,6 @@
 import * as bcrypt from "bcrypt";
 import { Secret, SignOptions } from "jsonwebtoken";
-import httpStatus from "http-status";
+import status from "http-status";
 import prisma from "../../utils/prisma";
 import config from "../../config";
 import emailSender from "../../utils/emailSender";
@@ -170,7 +170,7 @@ const resetPassword = async (
   );
 
   if (!isValidToken) {
-    throw new AppError(httpStatus.FORBIDDEN, "Forbidden!");
+    throw new AppError(status.FORBIDDEN, "Forbidden!");
   }
 
   // hash password

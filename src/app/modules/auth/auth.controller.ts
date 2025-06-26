@@ -1,5 +1,5 @@
 import { AuthServices } from "./auth.service";
-import httpStatus from "http-status";
+import status from "http-status";
 import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
 
@@ -14,7 +14,7 @@ const loginUser = catchAsync(async (req, res) => {
   });
 
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: status.OK,
     success: true,
     message: "Logged in successfully!",
     data: {
@@ -30,7 +30,7 @@ const refreshToken = catchAsync(async (req, res) => {
   const result = await AuthServices.refreshToken(refreshToken);
 
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: status.OK,
     success: true,
     message: "Access token genereated successfully!",
     data: result,
@@ -47,7 +47,7 @@ const changePassword = catchAsync(async (req, res) => {
   const result = await AuthServices.changePassword(user, req.body);
 
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: status.OK,
     success: true,
     message: "Password Changed successfully",
     data: result,
@@ -58,7 +58,7 @@ const forgotPassword = catchAsync(async (req, res) => {
   await AuthServices.forgotPassword(req.body);
 
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: status.OK,
     success: true,
     message: "Check your email!",
     data: null,
@@ -71,7 +71,7 @@ const resetPassword = catchAsync(async (req, res) => {
   await AuthServices.resetPassword(token, req.body);
 
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: status.OK,
     success: true,
     message: "Password Reset!",
     data: null,

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import httpStatus from "http-status";
+import status from "http-status";
 import { Prisma } from "../../generated/prisma";
 import { JsonWebTokenError } from "jsonwebtoken";
 
@@ -9,7 +9,7 @@ const globalErrorHandler = (
   res: Response,
   next: NextFunction,
 ) => {
-  let statusCode = httpStatus.INTERNAL_SERVER_ERROR;
+  let statusCode = status.INTERNAL_SERVER_ERROR;
   let success = false;
   let message = err.message || "Something went wrong!";
   let error = err;

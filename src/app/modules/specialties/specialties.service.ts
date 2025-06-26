@@ -32,7 +32,7 @@ const deleteFromDB = async (id: string): Promise<Specialties> => {
   return result;
 };
 
-export const SpecialtiesService = {
+export const SpecialtiesServices = {
   inserIntoDB,
   getAllFromDB,
   deleteFromDB,

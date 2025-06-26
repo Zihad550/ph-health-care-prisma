@@ -1,4 +1,4 @@
-import { AdminService } from "./admin.service";
+import { AdminServices } from "./admin.service";
 import { adminFilterableFields } from "./admin.constant";
 import status from "http-status";
 import pick from "../../utils/pick";
@@ -8,7 +8,7 @@ import sendResponse from "../../utils/sendResponse";
 const getAllFromDB = catchAsync(async (req, res) => {
   const filters = pick(req.query, adminFilterableFields);
   const options = pick(req.query, ["limit", "page", "sortBy", "sortOrder"]);
-  const result = await AdminService.getAllFromDB(filters, options);
+  const result = await AdminServices.getAllFromDB(filters, options);
 
   sendResponse(res, {
     statusCode: status.OK,
@@ -22,7 +22,7 @@ const getAllFromDB = catchAsync(async (req, res) => {
 const getByIdFromDB = catchAsync(async (req, res) => {
   const { id } = req.params;
 
-  const result = await AdminService.getByIdFromDB(id);
+  const result = await AdminServices.getByIdFromDB(id);
   sendResponse(res, {
     statusCode: status.OK,
     success: true,
@@ -34,7 +34,7 @@ const getByIdFromDB = catchAsync(async (req, res) => {
 const updateIntoDB = catchAsync(async (req, res) => {
   const { id } = req.params;
 
-  const result = await AdminService.updateIntoDB(id, req.body);
+  const result = await AdminServices.updateIntoDB(id, req.body);
   sendResponse(res, {
     statusCode: status.OK,
     success: true,
@@ -46,7 +46,7 @@ const updateIntoDB = catchAsync(async (req, res) => {
 const deleteFromDB = catchAsync(async (req, res) => {
   const { id } = req.params;
 
-  const result = await AdminService.deleteFromDB(id);
+  const result = await AdminServices.deleteFromDB(id);
   sendResponse(res, {
     statusCode: status.OK,
     success: true,
@@ -58,7 +58,7 @@ const deleteFromDB = catchAsync(async (req, res) => {
 const softDeleteFromDB = catchAsync(async (req, res) => {
   const { id } = req.params;
 
-  const result = await AdminService.softDeleteFromDB(id);
+  const result = await AdminServices.softDeleteFromDB(id);
   sendResponse(res, {
     statusCode: status.OK,
     success: true,

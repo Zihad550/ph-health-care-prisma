@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import httpStatus from "http-status";
+import status from "http-status";
 import { patientFilterableFields } from "./patient.constants";
 import { PatientServices } from "./patient.services";
 import catchAsync from "../../utils/catchAsync";
@@ -13,7 +13,7 @@ const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
   const result = await PatientServices.getAllFromDB(filters, options);
 
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: status.OK,
     success: true,
     message: "Patient retrieval successfully",
     meta: result.meta,
@@ -26,7 +26,7 @@ const getByIdFromDB = catchAsync(async (req: Request, res: Response) => {
   const result = await PatientServices.getByIdFromDB(id);
 
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: status.OK,
     success: true,
     message: "Patient retrieval successfully",
     data: result,
@@ -38,7 +38,7 @@ const updateIntoDB = catchAsync(async (req: Request, res: Response) => {
   const result = await PatientServices.updateIntoDB(id, req.body);
 
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: status.OK,
     success: true,
     message: "Patient updated successfully",
     data: result,
@@ -49,7 +49,7 @@ const deleteFromDB = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const result = await PatientServices.deleteFromDB(id);
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: status.OK,
     success: true,
     message: "Patient deleted successfully",
     data: result,
@@ -60,7 +60,7 @@ const softDelete = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const result = await PatientServices.softDelete(id);
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: status.OK,
     success: true,
     message: "Patient soft deleted successfully",
     data: result,
