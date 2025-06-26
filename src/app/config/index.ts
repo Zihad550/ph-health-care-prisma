@@ -25,6 +25,9 @@ const EnvSchema = z.object({
   SSL_FAIL_URL: z.string(),
   SSL_PAYMENT_API: z.string(),
   SSL_VALIDATION_API: z.string(),
+  CLOUDINARY_CLOUD_NAME: z.string(),
+  CLOUDINARY_API_KEY: z.string(),
+  CLOUDINARY_API_SECRET: z.string(),
 });
 
 try {
