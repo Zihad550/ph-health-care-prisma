@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import status from "http-status";
-import { SpecialtiesService } from "./specialties.service";
+import { SpecialtiesServices } from "./specialties.service";
 import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
 
 const inserIntoDB = catchAsync(async (req, res) => {
-  const result = await SpecialtiesService.inserIntoDB(req);
+  const result = await SpecialtiesServices.inserIntoDB(req);
 
   sendResponse(res, {
     statusCode: status.OK,
@@ -16,7 +16,7 @@ const inserIntoDB = catchAsync(async (req, res) => {
 });
 
 const getAllFromDB = catchAsync(async (req, res) => {
-  const result = await SpecialtiesService.getAllFromDB();
+  const result = await SpecialtiesServices.getAllFromDB();
   sendResponse(res, {
     statusCode: status.OK,
     success: true,
@@ -27,7 +27,7 @@ const getAllFromDB = catchAsync(async (req, res) => {
 
 const deleteFromDB = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const result = await SpecialtiesService.deleteFromDB(id);
+  const result = await SpecialtiesServices.deleteFromDB(id);
   sendResponse(res, {
     statusCode: status.OK,
     success: true,
@@ -36,7 +36,7 @@ const deleteFromDB = catchAsync(async (req, res) => {
   });
 });
 
-export const SpecialtiesController = {
+export const SpecialtiesControllers = {
   inserIntoDB,
   getAllFromDB,
   deleteFromDB,

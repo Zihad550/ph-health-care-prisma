@@ -1,14 +1,14 @@
-import { userService } from "./user.service";
-import httpStatus from "http-status";
+import { UserServices } from "./user.service";
+import status from "http-status";
 import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
 import pick from "../../utils/pick";
 import { userFilterableFields } from "./user.constant";
 
 const createAdmin = catchAsync(async (req, res) => {
-  const result = await userService.createAdmin(req);
+  const result = await UserServices.createAdmin(req);
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: status.OK,
     success: true,
     message: "Admin Created successfuly!",
     data: result,
@@ -16,9 +16,9 @@ const createAdmin = catchAsync(async (req, res) => {
 });
 
 const createDoctor = catchAsync(async (req, res) => {
-  const result = await userService.createDoctor(req);
+  const result = await UserServices.createDoctor(req);
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: status.OK,
     success: true,
     message: "Doctor Created successfuly!",
     data: result,
@@ -26,9 +26,9 @@ const createDoctor = catchAsync(async (req, res) => {
 });
 
 const createPatient = catchAsync(async (req, res) => {
-  const result = await userService.createPatient(req);
+  const result = await UserServices.createPatient(req);
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: status.OK,
     success: true,
     message: "Patient Created successfuly!",
     data: result,
@@ -39,10 +39,10 @@ const getAllFromDB = catchAsync(async (req, res) => {
   const filters = pick(req.query, userFilterableFields);
   const options = pick(req.query, ["limit", "page", "sortBy", "sortOrder"]);
 
-  const result = await userService.getAllFromDB(filters, options);
+  const result = await UserServices.getAllFromDB(filters, options);
 
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: status.OK,
     success: true,
     message: "Users data fetched!",
     meta: result.meta,
@@ -52,10 +52,10 @@ const getAllFromDB = catchAsync(async (req, res) => {
 
 const changeProfileStatus = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const result = await userService.changeProfileStatus(id, req.body);
+  const result = await UserServices.changeProfileStatus(id, req.body);
 
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: status.OK,
     success: true,
     message: "Users profile status changed!",
     data: result,
@@ -65,10 +65,10 @@ const changeProfileStatus = catchAsync(async (req, res) => {
 const getMyProfile = catchAsync(async (req, res) => {
   const user = req.user;
 
-  const result = await userService.getMyProfile(user);
+  const result = await UserServices.getMyProfile(user);
 
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: status.OK,
     success: true,
     message: "My profile data fetched!",
     data: result,
@@ -78,10 +78,10 @@ const getMyProfile = catchAsync(async (req, res) => {
 const updateMyProfie = catchAsync(async (req, res) => {
   const user = req.user;
 
-  const result = await userService.updateMyProfie(user, req);
+  const result = await UserServices.updateMyProfie(user, req);
 
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: status.OK,
     success: true,
     message: "My profile updated!",
     data: result,

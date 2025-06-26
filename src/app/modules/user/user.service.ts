@@ -296,7 +296,7 @@ const updateMyProfie = async (user: IJwtPayload, req: Request) => {
   return { ...profileInfo };
 };
 
-export const userService = {
+export const UserServices = {
   createAdmin,
   createDoctor,
   createPatient,
