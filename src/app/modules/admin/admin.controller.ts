@@ -1,4 +1,3 @@
-import { NextFunction, Request, RequestHandler, Response } from "express";
 import { AdminService } from "./admin.service";
 import { adminFilterableFields } from "./admin.constant";
 import status from "http-status";
@@ -6,23 +5,21 @@ import pick from "../../utils/pick";
 import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
 
-const getAllFromDB: RequestHandler = catchAsync(
-  async (req: Request, res: Response) => {
-    const filters = pick(req.query, adminFilterableFields);
-    const options = pick(req.query, ["limit", "page", "sortBy", "sortOrder"]);
-    const result = await AdminService.getAllFromDB(filters, options);
+const getAllFromDB = catchAsync(async (req, res) => {
+  const filters = pick(req.query, adminFilterableFields);
+  const options = pick(req.query, ["limit", "page", "sortBy", "sortOrder"]);
+  const result = await AdminService.getAllFromDB(filters, options);
 
-    sendResponse(res, {
-      statusCode: status.OK,
-      success: true,
-      message: "Admin data fetched!",
-      meta: result.meta,
-      data: result.data,
-    });
-  },
-);
+  sendResponse(res, {
+    statusCode: status.OK,
+    success: true,
+    message: "Admin data fetched!",
+    meta: result.meta,
+    data: result.data,
+  });
+});
 
-const getByIdFromDB = catchAsync(async (req: Request, res: Response) => {
+const getByIdFromDB = catchAsync(async (req, res) => {
   const { id } = req.params;
 
   const result = await AdminService.getByIdFromDB(id);
@@ -34,7 +31,7 @@ const getByIdFromDB = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const updateIntoDB = catchAsync(async (req: Request, res: Response) => {
+const updateIntoDB = catchAsync(async (req, res) => {
   const { id } = req.params;
 
   const result = await AdminService.updateIntoDB(id, req.body);
@@ -46,7 +43,7 @@ const updateIntoDB = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const deleteFromDB = catchAsync(async (req: Request, res: Response) => {
+const deleteFromDB = catchAsync(async (req, res) => {
   const { id } = req.params;
 
   const result = await AdminService.deleteFromDB(id);
@@ -58,7 +55,7 @@ const deleteFromDB = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const softDeleteFromDB = catchAsync(async (req: Request, res: Response) => {
+const softDeleteFromDB = catchAsync(async (req, res) => {
   const { id } = req.params;
 
   const result = await AdminService.softDeleteFromDB(id);

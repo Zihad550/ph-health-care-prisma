@@ -5,6 +5,7 @@ import catchAsync from "../utils/catchAsync";
 import { UserRole } from "../../generated/prisma";
 import AppError from "../errors/AppError";
 import prisma from "../utils/prisma";
+import { IJwtPayload } from "../interfaces/jwt.interface";
 
 const auth = (...requiredRoles: UserRole[]) => {
   return catchAsync(async (req, res, next) => {
@@ -15,18 +16,16 @@ const auth = (...requiredRoles: UserRole[]) => {
       throw new AppError(status.UNAUTHORIZED, "You are not authorized!");
 
     // checking if the given token is valid
-    let decoded;
-    try {
-      decoded = jwt.verify(token, config.JWT_ACCESS_TOKEN_SECRET) as JwtPayload;
-    } catch (err) {
-      throw new AppError(status.UNAUTHORIZED, "Unauthorized");
-    }
+    const decoded = jwt.verify(
+      token,
+      config.JWT_ACCESS_TOKEN_SECRET,
+    ) as IJwtPayload;
 
-    const { role, userId, iat } = decoded;
+    const { role, email } = decoded;
 
     // checking if the user is exist
-    const user = await prisma.user.findFirst({
-      where: { id: userId },
+    const user = await prisma.user.findUnique({
+      where: { email },
       include: {
         admin: {
           select: {
@@ -60,7 +59,7 @@ const auth = (...requiredRoles: UserRole[]) => {
     if (requiredRoles && !requiredRoles.includes(role))
       throw new AppError(status.UNAUTHORIZED, "You are not authorized  hi!");
 
-    req.user = decoded as JwtPayload;
+    req.user = decoded;
     next();
   });
 };
