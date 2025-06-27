@@ -6,6 +6,7 @@ import { UserRole } from "../../generated/prisma";
 import AppError from "../errors/AppError";
 import prisma from "../utils/prisma";
 import { IJwtPayload } from "../interfaces/jwt.interface";
+import { jwtUtils } from "../utils/jwt.utils";
 
 const auth = (...requiredRoles: UserRole[]) => {
   return catchAsync(async (req, res, next) => {
@@ -16,10 +17,7 @@ const auth = (...requiredRoles: UserRole[]) => {
       throw new AppError(status.UNAUTHORIZED, "You are not authorized!");
 
     // checking if the given token is valid
-    const decoded = jwt.verify(
-      token,
-      config.JWT_ACCESS_TOKEN_SECRET,
-    ) as IJwtPayload;
+    const decoded = jwtUtils.verifyToken(token, config.JWT_ACCESS_TOKEN_SECRET);
 
     const { role, email } = decoded;
 

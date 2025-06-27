@@ -1,4 +1,3 @@
-import { Request, Response } from "express";
 import { PaymentServices } from "./payment.service";
 import httpStatus from "http-status";
 import sendResponse from "../../utils/sendResponse";
