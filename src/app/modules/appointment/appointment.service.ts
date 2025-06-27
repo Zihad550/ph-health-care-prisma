@@ -66,17 +66,7 @@ const createAppointment = async (user: IJwtPayload, payload: any) => {
     // PH-HealthCare-datatime
     const today = new Date();
 
-    const transactionId =
-      "PH-HealthCare-" +
-      today.getFullYear() +
-      "-" +
-      today.getMonth() +
-      "-" +
-      today.getDay() +
-      "-" +
-      today.getHours() +
-      "-" +
-      today.getMinutes();
+    const transactionId = uuidv4();
 
     await tx.payment.create({
       data: {
@@ -240,7 +230,7 @@ const changeAppointmentStatus = async (
   });
 
   if (user?.role === UserRole.DOCTOR) {
-    if (!(user.email === appointmentData.doctor.email)) {
+    if (user.email !== appointmentData.doctor.email) {
       throw new AppError(
         httpStatus.BAD_REQUEST,
         "This is not your appointment!",

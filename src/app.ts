@@ -4,6 +4,10 @@ import router from "./app/routes";
 import globalErrorHandler from "./app/middlewares/globalErrorHandler";
 import notFound from "./app/middlewares/notFound";
 import cookieParser from "cookie-parser";
+import cron from "node-cron";
+import { AppointmentServices } from "./app/modules/appointment/appointment.service";
+import AppError from "./app/errors/AppError";
+import status from "http-status";
 
 const app: Application = express();
 
@@ -12,6 +16,15 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+cron.schedule("* * * * *", () => {
+  try {
+    AppointmentServices.cancelUnpaidAppointments();
+  } catch (err) {
+    console.error(err);
+    throw new AppError(status.INTERNAL_SERVER_ERROR, "Cron job failed");
+  }
+});
 
 // routes
 app.get("/health", (req, res) => {
