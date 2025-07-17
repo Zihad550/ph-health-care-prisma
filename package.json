@@ -21,8 +21,8 @@
   },
   "lint-staged": {
     "**/*": [
-      "eslint src",
-      "prettier --write --ignore-unknown"
+      "prettier --check --ignore-unknown",
+      "eslint src"
     ]
   },
   "keywords": [],
