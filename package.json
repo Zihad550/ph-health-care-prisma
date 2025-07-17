@@ -20,9 +20,10 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "**/*": [
-      "prettier --check --ignore-unknown",
-      "eslint src"
+    "src/*": [
+      "tsc --noEmit",
+      "eslint src",
+      "prettier --check --ignore-unknown"
     ]
   },
   "keywords": [],
