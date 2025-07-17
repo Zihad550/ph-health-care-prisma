@@ -20,9 +20,8 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "src/*": [
-      "tsc --noEmit",
-      "eslint src",
+    "src/**": [
+      "eslint",
       "prettier --check --ignore-unknown"
     ]
   },

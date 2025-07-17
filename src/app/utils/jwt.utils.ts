@@ -14,7 +14,6 @@ const generateToken = (
 };
 
 const verifyToken = (token: string, secret: Secret) => {
-  const le;
   return verify(token, secret) as IJwtPayload;
 };
 
