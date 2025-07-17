@@ -1,21 +1,20 @@
 import * as bcrypt from "bcrypt";
 import { Request } from "express";
-import { IPaginationOptions } from "../../interfaces/pagination";
-import { userSearchAbleFields } from "./user.constant";
-import { IFile } from "../../interfaces/file.interface";
-import { fileUploader } from "../../utils/fileUploader";
-import prisma from "../../utils/prisma";
 import {
   Admin,
   Doctor,
   Patient,
   Prisma,
-  PrismaClient,
   UserRole,
   UserStatus,
 } from "../../../generated/prisma";
+import { IFile } from "../../interfaces/file.interface";
 import { IJwtPayload } from "../../interfaces/jwt.interface";
+import { IPaginationOptions } from "../../interfaces/pagination";
+import { fileUploader } from "../../utils/fileUploader";
 import { paginationUtils } from "../../utils/pagination.utils";
+import prisma from "../../utils/prisma";
+import { userSearchAbleFields } from "./user.constant";
 
 const createAdmin = async (req: Request): Promise<Admin> => {
   const file = req.file as IFile;
@@ -116,7 +115,6 @@ const getAllFromDB = async (params: any, options: IPaginationOptions) => {
 
   const andCondions: Prisma.UserWhereInput[] = [];
 
-  //console.log(filterData);
   if (params.searchTerm) {
     andCondions.push({
       OR: userSearchAbleFields.map((field) => ({

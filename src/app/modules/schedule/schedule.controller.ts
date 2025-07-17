@@ -1,8 +1,8 @@
 import status from "http-status";
-import { ScheduleServices } from "./schedule.sevice";
 import catchAsync from "../../utils/catchAsync";
-import sendResponse from "../../utils/sendResponse";
 import pick from "../../utils/pick";
+import sendResponse from "../../utils/sendResponse";
+import { ScheduleServices } from "./schedule.sevice";
 
 const inserIntoDB = catchAsync(async (req, res) => {
   const result = await ScheduleServices.inserIntoDB(req.body);
@@ -20,13 +20,37 @@ const getAllFromDB = catchAsync(async (req, res) => {
   const options = pick(req.query, ["limit", "page", "sortBy", "sortOrder"]);
 
   const user = req.user;
-  const result = await ScheduleServices.getAllFromDB(filters, options, user);
+  const { data, meta } = await ScheduleServices.getAllFromDB(
+    filters,
+    options,
+    user,
+  );
 
   sendResponse(res, {
     statusCode: status.OK,
     success: true,
     message: "Schedule fetched successfully!",
-    data: result,
+    data,
+    meta,
+  });
+});
+
+const getAllDoctorScheduleFromDB = catchAsync(async (req, res) => {
+  const filters = pick(req.query, ["startDate", "endDate"]);
+  const options = pick(req.query, ["limit", "page", "sortBy", "sortOrder"]);
+
+  const { data, meta } = await ScheduleServices.getAllDoctorScheduleFromDB(
+    filters,
+    options,
+    req.params.email,
+  );
+
+  sendResponse(res, {
+    statusCode: status.OK,
+    success: true,
+    message: "Doctor schedules fetched successfully!",
+    data,
+    meta,
   });
 });
 
@@ -57,4 +81,5 @@ export const ScheduleControllers = {
   getAllFromDB,
   getByIdFromDB,
   deleteFromDB,
+  getAllDoctorScheduleFromDB,
 };

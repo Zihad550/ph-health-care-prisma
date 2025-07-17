@@ -1,7 +1,7 @@
 import * as bcrypt from "bcrypt";
 import { UserRole } from "../../generated/prisma";
-import prisma from "../utils/prisma";
 import config from "../config";
+import prisma from "../utils/prisma";
 
 const seedSuperAdmin = async () => {
   try {
@@ -20,6 +20,7 @@ const seedSuperAdmin = async () => {
         email: config.SUPER_ADMIN_EMAIL,
         password: hashedPassword,
         role: UserRole.SUPER_ADMIN,
+        needPasswordChange: false,
         admin: {
           create: {
             name: config.SUPER_ADMIN_NAME,

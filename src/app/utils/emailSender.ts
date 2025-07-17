@@ -22,8 +22,6 @@ const emailSender = async (email: string, html: string) => {
     //text: "Hello world?", // plain text body
     html, // html body
   });
-
-  //console.log("Message sent: %s", info.messageId);
 };
 
 export default emailSender;

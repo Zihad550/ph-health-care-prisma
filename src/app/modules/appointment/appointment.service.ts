@@ -1,8 +1,5 @@
+import httpStatus from "http-status";
 import { v4 as uuidv4 } from "uuid";
-import { IPaginationOptions } from "../../interfaces/pagination";
-import { IJwtPayload } from "../../interfaces/jwt.interface";
-import prisma from "../../utils/prisma";
-import { paginationUtils } from "../../utils/pagination.utils";
 import {
   AppointmentStatus,
   PaymentStatus,
@@ -10,7 +7,10 @@ import {
   UserRole,
 } from "../../../generated/prisma";
 import AppError from "../../errors/AppError";
-import httpStatus from "http-status";
+import { IJwtPayload } from "../../interfaces/jwt.interface";
+import { IPaginationOptions } from "../../interfaces/pagination";
+import { paginationUtils } from "../../utils/pagination.utils";
+import prisma from "../../utils/prisma";
 
 const createAppointment = async (user: IJwtPayload, payload: any) => {
   const patientData = await prisma.patient.findUniqueOrThrow({
@@ -62,9 +62,6 @@ const createAppointment = async (user: IJwtPayload, payload: any) => {
         appointmentId: appointmentData.id,
       },
     });
-
-    // PH-HealthCare-datatime
-    const today = new Date();
 
     const transactionId = uuidv4();
 
@@ -295,8 +292,6 @@ const cancelUnpaidAppointments = async () => {
       });
     }
   });
-
-  //console.log("updated")
 };
 
 export const AppointmentServices = {

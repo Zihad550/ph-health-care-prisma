@@ -1,12 +1,10 @@
 import status from "http-status";
-import jwt, { JwtPayload } from "jsonwebtoken";
-import config from "../config";
-import catchAsync from "../utils/catchAsync";
 import { UserRole } from "../../generated/prisma";
+import config from "../config";
 import AppError from "../errors/AppError";
-import prisma from "../utils/prisma";
-import { IJwtPayload } from "../interfaces/jwt.interface";
+import catchAsync from "../utils/catchAsync";
 import { jwtUtils } from "../utils/jwt.utils";
+import prisma from "../utils/prisma";
 
 const auth = (...requiredRoles: UserRole[]) => {
   return catchAsync(async (req, res, next) => {

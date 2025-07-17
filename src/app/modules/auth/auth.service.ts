@@ -1,15 +1,14 @@
 import * as bcrypt from "bcrypt";
-import { Secret, SignOptions } from "jsonwebtoken";
 import status from "http-status";
-import prisma from "../../utils/prisma";
-import config from "../../config";
-import emailSender from "../../utils/emailSender";
-import AppError from "../../errors/AppError";
-import { jwtUtils } from "../../utils/jwt.utils";
+import { SignOptions } from "jsonwebtoken";
 import { UserStatus } from "../../../generated/prisma";
+import config from "../../config";
+import AppError from "../../errors/AppError";
+import emailSender from "../../utils/emailSender";
+import { jwtUtils } from "../../utils/jwt.utils";
+import prisma from "../../utils/prisma";
 
 const loginUser = async (payload: { email: string; password: string }) => {
-  console.log({ config });
   const userData = await prisma.user.findUniqueOrThrow({
     where: {
       email: payload.email,
@@ -127,7 +126,6 @@ const forgotPassword = async (payload: { email: string }) => {
     config.JWT_RESET_PASS_SECRET,
     config.JWT_RESET_PASS_EXPIRES_IN as SignOptions["expiresIn"],
   );
-  //console.log(resetPassToken)
 
   const resetPassLink =
     config.RESET_PASS_LINK + `?userId=${userData.id}&token=${resetPassToken}`;
@@ -148,15 +146,12 @@ const forgotPassword = async (payload: { email: string }) => {
         </div>
         `,
   );
-  //console.log(resetPassLink)
 };
 
 const resetPassword = async (
   token: string,
   payload: { id: string; password: string },
 ) => {
-  console.log({ token, payload });
-
   const userData = await prisma.user.findUniqueOrThrow({
     where: {
       id: payload.id,

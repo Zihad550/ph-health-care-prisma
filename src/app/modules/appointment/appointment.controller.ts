@@ -1,10 +1,9 @@
-import { Request, Response } from "express";
 import status from "http-status";
-import { AppointmentServices } from "./appointment.service";
-import { appointmentFilterableFields } from "./appointment.constant";
 import catchAsync from "../../utils/catchAsync";
-import sendResponse from "../../utils/sendResponse";
 import pick from "../../utils/pick";
+import sendResponse from "../../utils/sendResponse";
+import { appointmentFilterableFields } from "./appointment.constant";
+import { AppointmentServices } from "./appointment.service";
 
 const createAppointment = catchAsync(async (req, res) => {
   const user = req.user;
@@ -24,7 +23,7 @@ const getMyAppointment = catchAsync(async (req, res) => {
   const filters = pick(req.query, ["status", "paymentStatus"]);
   const options = pick(req.query, ["limit", "page", "sortBy", "sortOrder"]);
 
-  const result = await AppointmentServices.getMyAppointment(
+  const { data, meta } = await AppointmentServices.getMyAppointment(
     user,
     filters,
     options,
@@ -34,7 +33,8 @@ const getMyAppointment = catchAsync(async (req, res) => {
     statusCode: status.OK,
     success: true,
     message: "My Appointment retrive successfully",
-    data: result,
+    data,
+    meta,
   });
 });
 

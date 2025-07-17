@@ -32,6 +32,8 @@ const EnvSchema = z.object({
   SUPER_ADMIN_PASSWORD: z.string().min(12),
   SUPER_ADMIN_NAME: z.string(),
   SUPER_ADMIN_PHONE: z.string(),
+  PRO_APP_URL: z.string(),
+  DEV_APP_URL: z.string().default("http://localhost:3000"),
 });
 
 try {

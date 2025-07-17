@@ -1,9 +1,9 @@
+import { Admin, Prisma, UserStatus } from "../../../generated/prisma";
+import { IPaginationOptions } from "../../interfaces/pagination";
+import { paginationUtils } from "../../utils/pagination.utils";
+import prisma from "../../utils/prisma";
 import { adminSearchAbleFields } from "./admin.constant";
 import { IAdminFilterRequest } from "./admin.interface";
-import { paginationUtils } from "../../utils/pagination.utils";
-import { IPaginationOptions } from "../../interfaces/pagination";
-import prisma from "../../utils/prisma";
-import { Admin, Prisma, UserStatus } from "../../../generated/prisma";
 
 const getAllFromDB = async (
   params: IAdminFilterRequest,
@@ -15,7 +15,6 @@ const getAllFromDB = async (
 
   const andCondions: Prisma.AdminWhereInput[] = [];
 
-  //console.log(filterData);
   if (params.searchTerm) {
     andCondions.push({
       OR: adminSearchAbleFields.map((field) => ({

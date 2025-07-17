@@ -1,9 +1,9 @@
 import express from "express";
-import { AppointmentControllers } from "./appointment.controller";
+import { UserRole } from "../../../generated/prisma";
 import auth from "../../middlewares/auth";
 import validateRequest from "../../middlewares/validateRequest";
+import { AppointmentControllers } from "./appointment.controller";
 import { AppointmentValidation } from "./appointment.validation";
-import { UserRole } from "../../../generated/prisma";
 
 const router = express.Router();
 
@@ -14,7 +14,7 @@ router.get(
 );
 
 router.get(
-  "/my-appointment",
+  "/my-appointments",
   auth(UserRole.PATIENT, UserRole.DOCTOR),
   AppointmentControllers.getMyAppointment,
 );
