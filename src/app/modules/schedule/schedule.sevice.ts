@@ -1,10 +1,10 @@
 import { addHours, addMinutes, format } from "date-fns";
-import { Prisma, Schedule } from "../../../generated/prisma";
+import { Prisma, Schedule, prisma } from "../../database";
 import { IJwtPayload } from "../../interfaces/jwt.interface";
 import { IPaginationOptions } from "../../interfaces/pagination";
 import convertDateTime from "../../utils/convertDate";
 import { paginationUtils } from "../../utils/pagination.utils";
-import prisma from "../../utils/prisma";
+
 import { IFilterRequest, ISchedule } from "./schedule.interface";
 
 const inserIntoDB = async (payload: ISchedule): Promise<Schedule[]> => {

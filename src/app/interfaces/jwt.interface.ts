@@ -1,5 +1,5 @@
 import { JwtPayload } from "jsonwebtoken";
-import { UserRole } from "../../generated/prisma";
+import { UserRole } from "../database";
 
 export interface IJwtPayload extends JwtPayload {
   email: string;

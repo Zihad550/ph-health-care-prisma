@@ -1,8 +1,7 @@
 import { Request } from "express";
+import { Specialties, prisma } from "../../database";
 import { IFile } from "../../interfaces/file.interface";
 import { fileUploader } from "../../utils/fileUploader";
-import prisma from "../../utils/prisma";
-import { Specialties } from "../../../generated/prisma";
 
 const inserIntoDB = async (req: Request) => {
   const file = req.file as IFile;

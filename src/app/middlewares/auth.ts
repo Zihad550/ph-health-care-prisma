@@ -1,10 +1,9 @@
 import status from "http-status";
-import { UserRole } from "../../generated/prisma";
 import config from "../config";
+import { prisma, UserRole } from "../database";
 import AppError from "../errors/AppError";
 import catchAsync from "../utils/catchAsync";
 import { jwtUtils } from "../utils/jwt.utils";
-import prisma from "../utils/prisma";
 
 const auth = (...requiredRoles: UserRole[]) => {
   return catchAsync(async (req, res, next) => {

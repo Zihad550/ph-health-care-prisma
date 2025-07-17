@@ -1,5 +1,4 @@
-import { PaymentStatus } from "../../../generated/prisma";
-import prisma from "../../utils/prisma";
+import { PaymentStatus, prisma } from "../../database";
 import { SSLServices } from "../ssl/ssl.service";
 
 const initPayment = async (appointmentId: string) => {

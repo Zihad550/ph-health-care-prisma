@@ -1,13 +1,14 @@
 import httpStatus from "http-status";
-import { IPaginationOptions } from "../../interfaces/pagination";
-import { IJwtPayload } from "../../interfaces/jwt.interface";
 import {
   AppointmentStatus,
   PaymentStatus,
   Prescription,
   Prisma,
-} from "../../../generated/prisma";
-import prisma from "../../utils/prisma";
+  prisma,
+} from "../../database";
+import { IJwtPayload } from "../../interfaces/jwt.interface";
+import { IPaginationOptions } from "../../interfaces/pagination";
+
 import AppError from "../../errors/AppError";
 import { paginationUtils } from "../../utils/pagination.utils";
 

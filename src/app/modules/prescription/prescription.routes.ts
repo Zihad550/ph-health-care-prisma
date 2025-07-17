@@ -1,9 +1,9 @@
 import express from "express";
-import { PrescriptionControllers } from "./prescription.controller";
+import { UserRole } from "../../database";
 import auth from "../../middlewares/auth";
 import validateRequest from "../../middlewares/validateRequest";
+import { PrescriptionControllers } from "./prescription.controller";
 import { PrescriptionValidation } from "./prescription.validation";
-import { UserRole } from "../../../generated/prisma";
 
 const router = express.Router();
 

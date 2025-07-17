@@ -1,6 +1,5 @@
-import { PaymentStatus, UserRole } from "../../../generated/prisma";
+import { PaymentStatus, UserRole, prisma } from "../../database";
 import { IJwtPayload } from "../../interfaces/jwt.interface";
-import prisma from "../../utils/prisma";
 const fetchDashboardMetaData = async (user: IJwtPayload) => {
   let metaData;
   switch (user?.role) {
@@ -126,7 +125,7 @@ const getDoctorMetaData = async (user: IJwtPayload) => {
   });
 
   const formattedAppointmentStatusDistribution =
-    appointmentStatusDistribution.map(({ status, _count }) => ({
+    appointmentStatusDistribution?.map(({ status, _count }: any) => ({
       status,
       count: Number(_count.id),
     }));
@@ -174,7 +173,7 @@ const getPatientMetaData = async (user: IJwtPayload) => {
   });
 
   const formattedAppointmentStatusDistribution =
-    appointmentStatusDistribution.map(({ status, _count }) => ({
+    appointmentStatusDistribution.map(({ status, _count }: any) => ({
       status,
       count: Number(_count.id),
     }));
@@ -207,7 +206,7 @@ const getPieChartData = async () => {
   });
 
   const formattedAppointmentStatusDistribution =
-    appointmentStatusDistribution.map(({ status, _count }) => ({
+    appointmentStatusDistribution.map(({ status, _count }: any) => ({
       status,
       count: Number(_count.id),
     }));

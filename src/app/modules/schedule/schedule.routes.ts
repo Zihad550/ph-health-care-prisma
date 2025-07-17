@@ -1,5 +1,5 @@
 import express from "express";
-import { UserRole } from "../../../generated/prisma";
+import { UserRole } from "../../database";
 import auth from "../../middlewares/auth";
 import { ScheduleControllers } from "./schedule.controller";
 

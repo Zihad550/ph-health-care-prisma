@@ -1,14 +1,12 @@
 import { Server } from "http";
 import app from "./app";
 import config from "./app/config";
+import { prisma } from "./app/database";
 import seedSuperAdmin from "./app/DB";
-import prisma from "./app/utils/prisma";
 
 let server: Server;
 async function main() {
   try {
-    await seedSuperAdmin();
-
     server = app.listen(config.PORT, () => {
       console.log(`app listening on port ${config.PORT}`);
     });
@@ -19,7 +17,10 @@ async function main() {
   }
 }
 
-main();
+(async () => {
+  await main();
+  await seedSuperAdmin();
+})();
 
 const exitHandler = () => {
   if (server) {

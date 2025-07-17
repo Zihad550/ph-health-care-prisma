@@ -4,11 +4,11 @@ import express, { Application } from "express";
 import status from "http-status";
 import cron from "node-cron";
 import config from "./app/config";
+import { prisma } from "./app/database";
 import AppError from "./app/errors/AppError";
 import globalErrorHandler from "./app/middlewares/globalErrorHandler";
 import notFound from "./app/middlewares/notFound";
 import router from "./app/routes";
-import prisma from "./app/utils/prisma";
 
 const app: Application = express();
 

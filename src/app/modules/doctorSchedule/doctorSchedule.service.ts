@@ -1,10 +1,9 @@
 import status from "http-status";
-import { DoctorSchedules, Prisma } from "../../../generated/prisma";
+import { DoctorSchedules, Prisma, prisma } from "../../database";
 import AppError from "../../errors/AppError";
 import { IJwtPayload } from "../../interfaces/jwt.interface";
 import { IPaginationOptions } from "../../interfaces/pagination";
 import { paginationUtils } from "../../utils/pagination.utils";
-import prisma from "../../utils/prisma";
 import { IMeta } from "../../utils/sendResponse";
 import { IDoctorScheduleFilterRequest } from "./doctorSchedule.interface";
 

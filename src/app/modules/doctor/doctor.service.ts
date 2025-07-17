@@ -1,9 +1,8 @@
-import { IDoctorFilterRequest, IDoctorUpdate } from "./doctor.interface";
+import { Doctor, Prisma, UserStatus, prisma } from "../../database";
 import { IPaginationOptions } from "../../interfaces/pagination";
-import { doctorSearchableFields } from "./doctor.constants";
 import { paginationUtils } from "../../utils/pagination.utils";
-import { Doctor, Prisma, UserStatus } from "../../../generated/prisma";
-import prisma from "../../utils/prisma";
+import { doctorSearchableFields } from "./doctor.constants";
+import { IDoctorFilterRequest, IDoctorUpdate } from "./doctor.interface";
 
 const getAllFromDB = async (
   filters: IDoctorFilterRequest,

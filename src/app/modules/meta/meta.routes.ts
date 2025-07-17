@@ -1,7 +1,7 @@
 import express from "express";
-import { MetaControllers } from "./meta.controller";
+import { UserRole } from "../../database";
 import auth from "../../middlewares/auth";
-import { UserRole } from "../../../generated/prisma";
+import { MetaControllers } from "./meta.controller";
 
 const router = express.Router();
 

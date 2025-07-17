@@ -1,10 +1,9 @@
 import httpStatus from "http-status";
-import { IPaginationOptions } from "../../interfaces/pagination";
-import { IJwtPayload } from "../../interfaces/jwt.interface";
-import prisma from "../../utils/prisma";
+import { prisma, Prisma, Review } from "../../database";
 import AppError from "../../errors/AppError";
+import { IJwtPayload } from "../../interfaces/jwt.interface";
+import { IPaginationOptions } from "../../interfaces/pagination";
 import { paginationUtils } from "../../utils/pagination.utils";
-import { Prisma, Review } from "../../../generated/prisma";
 
 const insertIntoDB = async (user: IJwtPayload, payload: Review) => {
   const patientData = await prisma.patient.findUniqueOrThrow({

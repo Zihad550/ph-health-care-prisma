@@ -1,9 +1,9 @@
 import express from "express";
-import { DoctorScheduleControllers } from "./doctorSchedule.controller";
+import { UserRole } from "../../database";
 import auth from "../../middlewares/auth";
 import validateRequest from "../../middlewares/validateRequest";
+import { DoctorScheduleControllers } from "./doctorSchedule.controller";
 import { DoctorScheduleValidation } from "./doctorSchedule.validation";
-import { UserRole } from "../../../generated/prisma";
 
 const router = express.Router();
 

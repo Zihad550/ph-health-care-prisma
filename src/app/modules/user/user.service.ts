@@ -7,13 +7,14 @@ import {
   Prisma,
   UserRole,
   UserStatus,
-} from "../../../generated/prisma";
+  prisma,
+} from "../../database";
 import { IFile } from "../../interfaces/file.interface";
 import { IJwtPayload } from "../../interfaces/jwt.interface";
 import { IPaginationOptions } from "../../interfaces/pagination";
 import { fileUploader } from "../../utils/fileUploader";
 import { paginationUtils } from "../../utils/pagination.utils";
-import prisma from "../../utils/prisma";
+
 import { userSearchAbleFields } from "./user.constant";
 
 const createAdmin = async (req: Request): Promise<Admin> => {

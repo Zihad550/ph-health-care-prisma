@@ -1,8 +1,8 @@
 import express from "express";
-import { ReviewController } from "./review.controller";
+import { UserRole } from "../../database";
 import auth from "../../middlewares/auth";
 import validateRequest from "../../middlewares/validateRequest";
-import { UserRole } from "../../../generated/prisma";
+import { ReviewController } from "./review.controller";
 
 import { ReviewValidation } from "./review.validation";
 

@@ -1,7 +1,6 @@
-import { Admin, Prisma, UserStatus } from "../../../generated/prisma";
+import { Admin, prisma, Prisma, UserStatus } from "../../database";
 import { IPaginationOptions } from "../../interfaces/pagination";
 import { paginationUtils } from "../../utils/pagination.utils";
-import prisma from "../../utils/prisma";
 import { adminSearchAbleFields } from "./admin.constant";
 import { IAdminFilterRequest } from "./admin.interface";
 

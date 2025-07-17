@@ -5,12 +5,12 @@ import {
   PaymentStatus,
   Prisma,
   UserRole,
-} from "../../../generated/prisma";
+  prisma,
+} from "../../database";
 import AppError from "../../errors/AppError";
 import { IJwtPayload } from "../../interfaces/jwt.interface";
 import { IPaginationOptions } from "../../interfaces/pagination";
 import { paginationUtils } from "../../utils/pagination.utils";
-import prisma from "../../utils/prisma";
 
 const createAppointment = async (user: IJwtPayload, payload: any) => {
   const patientData = await prisma.patient.findUniqueOrThrow({
