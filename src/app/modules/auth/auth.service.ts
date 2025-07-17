@@ -52,7 +52,7 @@ const refreshToken = async (token: string) => {
   let decodedData;
   try {
     decodedData = jwtUtils.verifyToken(token, config.JWT_REFRESH_TOKEN_SECRET);
-  } catch (err) {
+  } catch {
     throw new Error("You are not authorized!");
   }
 
@@ -151,7 +151,7 @@ const resetPassword = async (
   token: string,
   payload: { id: string; password: string },
 ) => {
-  const userData = await prisma.user.findUniqueOrThrow({
+  await prisma.user.findUniqueOrThrow({
     where: {
       id: payload.id,
       status: UserStatus.ACTIVE,

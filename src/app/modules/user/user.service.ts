@@ -116,7 +116,7 @@ const getAllFromDB = async (params: any, options: IPaginationOptions) => {
 
   const andCondions: Prisma.UserWhereInput[] = [];
 
-  if (params.searchTerm) {
+  if (searchTerm) {
     andCondions.push({
       OR: userSearchAbleFields.map((field) => ({
         [field]: {

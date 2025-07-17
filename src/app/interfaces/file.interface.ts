@@ -1,4 +1,4 @@
-export type IFile = {
+export interface IFile {
   fieldname: string;
   originalname: string;
   encoding: string;
@@ -7,4 +7,4 @@ export type IFile = {
   filename: string;
   path: string;
   size: number;
-};
+}

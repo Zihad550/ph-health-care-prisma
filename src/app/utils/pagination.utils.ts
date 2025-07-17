@@ -1,17 +1,17 @@
-type IOptions = {
+interface IOptions {
   page?: number;
   limit?: number;
   sortOrder?: string;
   sortBy?: string;
-};
+}
 
-type IOptionsResult = {
+interface IOptionsResult {
   page: number;
   limit: number;
   skip: number;
   sortBy: string;
   sortOrder: string;
-};
+}
 
 const calculatePagination = (options: IOptions): IOptionsResult => {
   const page: number = Number(options.page) || 1;

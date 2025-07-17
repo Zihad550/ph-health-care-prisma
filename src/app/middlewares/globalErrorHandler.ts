@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextFunction, Request, Response } from "express";
 import status from "http-status";
 import { JsonWebTokenError } from "jsonwebtoken";
@@ -9,8 +10,8 @@ const globalErrorHandler = (
   res: Response,
   next: NextFunction,
 ) => {
-  let statusCode = status.INTERNAL_SERVER_ERROR;
-  let success = false;
+  const statusCode = status.INTERNAL_SERVER_ERROR;
+  const success = false;
   let message = err.message || "Something went wrong!";
   let error = err;
 

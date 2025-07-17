@@ -31,11 +31,7 @@ const insertIntoDB = async (
   return result;
 };
 
-const getMySchedule = async (
-  filters: any,
-  options: IPaginationOptions,
-  user: IJwtPayload,
-) => {
+const getMySchedule = async (filters: any, options: IPaginationOptions) => {
   const { limit, page, skip } = paginationUtils.calculatePagination(options);
   const { startDate, endDate, ...filterData } = filters;
 

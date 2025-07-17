@@ -1,10 +1,9 @@
-import { Request, Response } from "express";
 import status from "http-status";
-import { DoctorScheduleServices } from "./doctorSchedule.service";
-import { scheduleFilterableFields } from "./doctorSchedule.constants";
 import catchAsync from "../../utils/catchAsync";
-import sendResponse from "../../utils/sendResponse";
 import pick from "../../utils/pick";
+import sendResponse from "../../utils/sendResponse";
+import { scheduleFilterableFields } from "./doctorSchedule.constants";
+import { DoctorScheduleServices } from "./doctorSchedule.service";
 
 const insertIntoDB = catchAsync(async (req, res) => {
   const user = req.user;
@@ -22,12 +21,7 @@ const getMySchedule = catchAsync(async (req, res) => {
   const filters = pick(req.query, ["startDate", "endDate", "isBooked"]);
   const options = pick(req.query, ["limit", "page", "sortBy", "sortOrder"]);
 
-  const user = req.user;
-  const result = await DoctorScheduleServices.getMySchedule(
-    filters,
-    options,
-    user,
-  );
+  const result = await DoctorScheduleServices.getMySchedule(filters, options);
 
   sendResponse(res, {
     statusCode: status.OK,

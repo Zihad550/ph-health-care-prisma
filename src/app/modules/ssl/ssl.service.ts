@@ -1,8 +1,8 @@
-import httpStatus from "http-status";
-import { IPaymentData } from "./ssl.interface";
-import config from "../../config";
 import axios from "axios";
+import httpStatus from "http-status";
+import config from "../../config";
 import AppError from "../../errors/AppError";
+import { IPaymentData } from "./ssl.interface";
 
 const initPayment = async (paymentData: IPaymentData) => {
   try {
@@ -47,7 +47,7 @@ const initPayment = async (paymentData: IPaymentData) => {
     });
 
     return response.data;
-  } catch (err) {
+  } catch {
     throw new AppError(httpStatus.BAD_REQUEST, "Payment error occured!");
   }
 };
@@ -60,7 +60,7 @@ const validatePayment = async (payload: any) => {
     });
 
     return response.data;
-  } catch (err) {
+  } catch {
     throw new AppError(httpStatus.BAD_REQUEST, "Payment validation failed!");
   }
 };

@@ -1,4 +1,4 @@
 export const prescriptionFilterableFields: string[] = [
-    'patientEmail',
-    'doctorEmail',
+  "patientEmail",
+  "doctorEmail",
 ];

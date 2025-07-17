@@ -14,7 +14,7 @@ const getAllFromDB = async (
 
   const andCondions: Prisma.AdminWhereInput[] = [];
 
-  if (params.searchTerm) {
+  if (searchTerm) {
     andCondions.push({
       OR: adminSearchAbleFields.map((field) => ({
         [field]: {
