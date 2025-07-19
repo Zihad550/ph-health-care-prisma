@@ -10,7 +10,7 @@ const globalErrorHandler = (
   res: Response,
   next: NextFunction,
 ) => {
-  const statusCode = status.INTERNAL_SERVER_ERROR;
+  let statusCode: number = status.INTERNAL_SERVER_ERROR;
   const success = false;
   let message = err.message || "Something went wrong!";
   let error = err;
@@ -24,6 +24,7 @@ const globalErrorHandler = (
       error = err.meta;
     }
   } else if (err instanceof JsonWebTokenError) {
+    statusCode = status.UNAUTHORIZED;
     message = err.message;
     error = err;
   }
