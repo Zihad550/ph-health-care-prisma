@@ -1,7 +1,8 @@
-import { AuthServices } from "./auth.service";
 import status from "http-status";
+import config from "../../config";
 import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
+import { AuthServices } from "./auth.service";
 
 const loginUser = catchAsync(async (req, res) => {
   const result = await AuthServices.loginUser(req.body);
@@ -9,7 +10,7 @@ const loginUser = catchAsync(async (req, res) => {
   const { refreshToken } = result;
 
   res.cookie("refreshToken", refreshToken, {
-    secure: false,
+    secure: config.NODE_ENV === "production",
     httpOnly: true,
   });
 
